@@ -9,7 +9,7 @@ if (!require("pacman")) install.packages("pacman")
 
 # pacman must already be installed; then load contributed
 # packages (including pacman) with pacman
-pacman::p_load(pacman, rio, tidyverse,DataExplorer,Esquisse,tidytext,wordcloud2,htmlwidgets,ggwordcloud)
+pacman::p_load(pacman, rio, tidyverse,DataExplorer,tidytext,wordcloud2,htmlwidgets,ggwordcloud)
 # pacman: for loading/unloading packages
 # rio: for importing data
 # tidyverse: for so many reasons
@@ -29,15 +29,10 @@ library(DataExplorer)
 
 create_report(firsts)
 
-
-library(esquisse)
-
 View(science)
 glimpse(science)
 create_report(science)
-
 glimpse(firsts)
-
 
 
 # WRANGLE THE DATA ################################
@@ -45,19 +40,14 @@ glimpse(firsts)
 ##Lets clean the accomplishment shwich has lot of first african american verbiage
 firsts <- firsts %>% as_tibble() %>% 
   mutate(year = as.factor(year)) 
-
 firsts <- firsts %>% mutate(accomplishment = str_replace(accomplishment,"First free African-American" , " ")) %>% 
 print()
-
 firsts <- firsts %>% mutate(accomplishment = str_replace(accomplishment,"First known African-American" , " ")) %>% 
   print()
-
 firsts <- firsts %>% mutate(accomplishment = str_replace(accomplishment,"First African-American" , " ")) %>% 
   print()
-
 firsts <- firsts %>% mutate(accomplishment = str_replace(accomplishment,"First" , " ")) %>% 
   print()
-
 
 ##Lets groupby and see how is the data looking
 
@@ -79,12 +69,6 @@ glimpse(firsts)
 firsts %>% nest(gender)
 
 
-?relocate
-
-# ##Lets see the proportions
-# firsts_gender %>% table(firsts_gender) %>% prop.table()
-# ?prop.table
-
 
 ## Lets replace the Gender verbiage to male and female
 
@@ -102,8 +86,6 @@ glimpse(science)
 colnames(science)[5] <- "accomplishment"
   
   print()
-
-
 
 
 # VISUALIZE ################################
@@ -131,11 +113,6 @@ count(word,sort = TRUE) %>%
 
 mywordcloud <- wordcloud2(acc1,size =0.5, color = "random-light", backgroundColor = "black")
 
-
-
-
-# SUMMARY ################################
-glimpse(df_ont)
 
 # CLEAN UP #################################################
 
